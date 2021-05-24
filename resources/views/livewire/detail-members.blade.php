@@ -1,5 +1,5 @@
 <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class=" max-w-max mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
             @if (session()->has('message'))
                 <div class="bg-green-100 border-t-4 rounded-b text-green-900 px-4 py-3 shadow-md my-3" role="alert">
@@ -10,13 +10,8 @@
                     </div>
                 </div>
             @endif
-            {{-- <div class="bg-white px-4 py-5 sm:grid-cols-none sm:gap-4 sm:px-6 rounded"> --}}
             <td>
-                <button wire:click="delete({{ $member_id }})"
-                    class="bg-red-500 hover:bg-red-700 text-white text-sm mb-5 ml-auto font-bold py-2 px-4 rounded-lg inline-block">Hapus
-                    User
-                </button>
-                <button wire:click="create({{ $member_id }})"
+                <button wire:click="create()"
                     class="bg-blue-500   hover:bg-blue-700 text-white text-sm mb-5 ml-auto font-bold py-2 px-4 rounded-lg inline-block">Tambah
                     data Air
                 </button>
@@ -59,10 +54,7 @@
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Email
                                         </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Action
-                                        </th>
+
 
                                     </tr>
                                 </thead>
@@ -121,7 +113,7 @@
                                         </span> --}}
                                         {{-- <div class="text-sm text-gray-900">{{ $email }}</div>
                                     </td> --}}
-                                        <td class="px-6 py-4 whitespace-nowrap align-middle text-sm font-medium">
+                                        {{-- <td class="px-6 py-4 whitespace-nowrap align-middle text-sm font-medium">
                                             <button wire:click="editP({{ $pengguna_id }})"
                                                 class=" text-xs leading-5 font-semibold rounded-md  text-green-800 py-1 px-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 " fill="none"
@@ -131,7 +123,7 @@
                                                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                 </svg>
                                             </button>
-                                        </td>
+                                        </td> --}}
 
                                         {{-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <button wire:click="editNPE({{ $pengguna_id }})"
@@ -178,7 +170,11 @@
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Jatuh Tempo
+                                            Dibuat
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Tempo
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -190,50 +186,64 @@
                                         </th>
                                     </tr>
                                 </thead>
+
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    <?= $i++ ?>
+                                    @forelse ($dataAir as $item)
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <div class="text-sm font-medium text-gray-900">
+                                                        <?= $i++ ?>
                                                 </div>
                                             </div>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    {{ $k3_awal }}
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <div class="text-sm font-medium text-gray-900">
+                                                        {{ $item->k3_awal }}
+                                                    </div>
+    
                                                 </div>
-
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">{{ $k3_akhir }}</div>
-
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">{{ $tanggal }}</div>
-
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">Biaya</div>
-                                        </td>
-                                        <td class="px-6 py-4 align-middle whitespace-nowrap text-sm text-gray-500">
-                                            <span
-                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full   text-green-800">
-                                                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                  </svg></a>
-
-                                            </span>
-                                            <span
-                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full  text-red-800">
-                                                <a href="#"> <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                  </svg></a>
-
-                                            </span>
-                                        </td>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">{{ $item->k3_akhir }}</div>
+    
+                                            </td>
+    
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">{{ $item->tanggal }}</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">{{ $item->tanggal }}</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="text-sm text-gray-900">Biaya</div>
+                                            </td>
+                                            <td class="px-6 py-4 align-middle whitespace-nowrap text-sm text-gray-500">
+                                               <button wire:click="edit({{ $item->id }})"
+                                                    class="px-2 inline-flex  text-xs leading-5 font-semibold text-yellow-400"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    </svg>
+                                                </button>
+                                                <button wire:click="delete({{ $item->id }})"
+                                                    class="px-2 inline-flex  text-xs leading-5 font-semibold text-red-600"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                </button>
+                                                </span>
+                                            </td>
+         @empty
+                                            <tr>
+                                                <td class=" italic border px-4 py-2 text-center text-gray-500 " colspan="7">Tidak ada data air !</td>
+                                            </tr>
+                                         @endforelse
                                     </tr>
                                 </tbody>
                             </table>

@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Meteran extends Model
 {
+    protected $fillable = ['k3_awal', 'k3_akhir', 'tanggal', 'alamat', 'id_pengguna'];
+    protected $primaryKey = 'id';
+    protected $table = 'meterans';
+
+    public function hanyaPunya()
+    {
+        return $this->belongsTo(Pengguna::class);
+    }
     use HasFactory;
-    protected $fillable = ['m3_awal', 'm3_akhir', 'tanggal', 'alamat'];
 }

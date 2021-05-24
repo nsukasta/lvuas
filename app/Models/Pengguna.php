@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengguna extends Model
 {
-    use HasFactory;
+
     protected $fillable = ['nik', 'no_meteran', 'nama', 'alamat', 'no_hp', 'email', 'status'];
+    protected $primaryKey = 'id';
+    protected $table = 'penggunas';
 
     protected $appends = ['status_label'];
 
@@ -21,4 +23,11 @@ class Pengguna extends Model
 
         return '<span class="text-yellow-600"> Premium </span>';
     }
+
+    public function memiliki()
+    {
+        return $this->hasMany(Meteran::class);
+    }
+
+    use HasFactory;
 }
