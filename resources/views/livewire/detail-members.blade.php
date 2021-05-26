@@ -16,6 +16,7 @@
                     data Air
                 </button>
 
+
                 @if ($isModal)
                     @include('livewire.create-air')
                 @endif
@@ -169,6 +170,10 @@
                                             K3 Akhir
                                         </th>
                                         <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                                            Total Penggunaan Air
+                                        </th>
+                                        <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Dibuat
                                         </th>
@@ -194,23 +199,25 @@
                                                 <div class="flex items-center">
                                                     <div class="text-sm font-medium text-gray-900">
                                                         <?= $i++ ?>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     <div class="text-sm font-medium text-gray-900">
-                                                        {{ $item->k3_awal }}
+                                                        {{ $item->k3_awal }} m<sup>3</sup>
                                                     </div>
     
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">{{ $item->k3_akhir }}</div>
-    
+                                                <div class="text-sm text-gray-900">{{ $item->k3_akhir }} m<sup>3</sup></div>
                                             </td>
-    
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">{{ $item->tanggal }}</div>
+                                                <div class="text-sm text-gray-900 text-center">{{ $item->k3_akhir }} m<sup>3</sup></div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap  ">
+                                                <div class="text-sm text-gray-900  ">{{ $item->tanggal }}</div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                     <div class="text-sm text-gray-900">{{ $item->tanggal }}</div>
@@ -239,13 +246,15 @@
                                                 </button>
                                                 </span>
                                             </td>
-         @empty
+                                @empty
                                             <tr>
                                                 <td class=" italic border px-4 py-2 text-center text-gray-500 " colspan="7">Tidak ada data air !</td>
                                             </tr>
                                          @endforelse
                                     </tr>
                                 </tbody>
+
+                                {{-- {{ $dataAir->links() }} --}}
                             </table>
                         </div>
                     </div>

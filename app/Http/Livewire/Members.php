@@ -4,15 +4,22 @@ namespace App\Http\Livewire;
 
 use App\Models\Pengguna;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Members extends Component
 {
-    public $penggunas, $nik, $no_meteran, $nama, $alamat, $no_hp, $email, $status, $pengguna_id;
-    public $isModal;
 
+    public $nik, $no_meteran, $nama, $alamat, $no_hp, $email, $status, $pengguna_id;
+    public $penggunas;
+    public $isModal;
+    public $cariMeteran;
+
+    use WithPagination;
     public function render()
     {
-        $this->penggunas = Pengguna::orderBy('created_at', 'DESC')->get();
+        $cariMeteran = '%' . $this->cariMeteran . '%';
+
+        $this->penggunas = Pengguna::where('nik', 'LIKE', $cariMeteran)->orderBy('created_at', 'DESC')->get();
         return view('livewire.members')->layout('layouts.admin2');
     }
 
@@ -70,7 +77,7 @@ class Members extends Component
             'status' => $this->status,
         ]);
 
-        session()->flash('message', $this->pengguna_id ? $this->nama . ' Diperbaharui' : $this->nama . ' Ditambahkan');
+        session()->flash('message', $this->pengguna_id ? $this->nama . ' diperbaharui' : $this->nama . ' ditambahkan');
         $this->closeModal();
         $this->resetFields();
 
@@ -98,4 +105,5 @@ class Members extends Component
         $pengguna->delete();
         session()->flash('message', $pengguna->nama . ' Dihapus');
     }
+
 }

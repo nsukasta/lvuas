@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Meteran;
 use App\Models\Pengguna;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class DetailMembers extends Component
 {
@@ -15,7 +16,7 @@ class DetailMembers extends Component
     public $dataMember;
     public $meteran_id;
     public $dataAir;
-
+    use WithPagination;
     public function render()
     {
         // $this->dataMember = Meteran::with('hanyaPunya')->get();
@@ -113,5 +114,12 @@ class DetailMembers extends Component
 
         $this->openModal();
 
+    }
+
+    public function statistik()
+    {
+        $maxAir = Meteran::meterans('');
+        $minAir = Meteran::min('k3_akhir');
+        $n = Meteran::count('');
     }
 }

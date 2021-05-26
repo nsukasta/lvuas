@@ -20,13 +20,23 @@
                                 </div>
                             </div>
                         @endif
-                        <button wire:click="create()"
-                            class="bg-blue-500 hover:bg-blue-700 rounded-md text-white font-semibold text-sm py-1 px-1 my-4 shadow"><svg
-                                xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg> Tambah Pengguna </button>
+
+                        <div>
+                            <button wire:click="create()"
+                                class="bg-blue-500 hover:bg-blue-700 rounded-lg text-white font-semibold text-sm py-1 px-1 my-4 shadow">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg> Tambah Pengguna </button>
+
+                            <div class=" py-1 relative mx-auto float-right text-left text-gray-600 mt-2">
+                                <input
+                                    class="border-1 border-gray-300 bg-white h-8 px-5 rounded-lg text-sm focus:outline-none"
+                                    type="number" name="search" placeholder="Cari no Meteran" wire:model="cariMeteran">
+                            </div>
+                        </div>
+
 
                         @if ($isModal)
                             @include('livewire.create')
@@ -35,7 +45,12 @@
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
+                                    <?php $i = 1; ?>
                                     <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            No
+                                        </th>
                                         <th scope="col "
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             No Meteran
@@ -59,9 +74,19 @@
 
                                     </tr>
                                 </thead>
+
                                 @forelse($penggunas as $row)
                                     <tbody class="bg-white divide-y divide-gray-200">
+
+
                                         <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <div class="text-sm font-medium text-gray-900">
+                                                        <?= $i++ ?>
+                                                </div>
+                                            </div>
+                                        </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
 
@@ -129,13 +154,19 @@
                                             </td> --}}
                                         </tr>
 
-                                    @empty
+            @empty
                                         <tr>
-                                            <td class="border px-4 py-2 text-center" colspan="5">Tidak ada data</td>
+                                            <td class="border px-4 py-2 text-center italic text-gray-600" colspan="7">Maaf data tidak tersedia!</td>
                                         </tr>
                                 @endforelse
                                 </tbody>
+                                
+                {{-- {{ $penggunas->links() }} --}}
+                               
+
                             </table>
+
+                           
                         </div>
                     </div>
                 </div>
